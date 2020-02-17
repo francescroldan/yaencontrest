@@ -10,6 +10,8 @@ interface AdvertisementRepository
 {
     public function save(Advertisement $advertisement): void;
 
+    public function search(AdvertisementId $id): ?Advertisement;
+
     public function searchAll(): array;
 
     public function matching(Criteria $criteria): array;

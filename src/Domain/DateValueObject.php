@@ -4,30 +4,25 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
-use DateTimeImmutable;
-use DateTimeInterface;
+use \DateTimeImmutable;
+use \DateTimeInterface;
 
 abstract class DateValueObject
 {
     protected $value;
 
-    public function __construct(DateTimeInmutable $value)
+    public function __construct(\DateTimeImmutable $value)
     {
         $this->value = $value;
     }
 
-    public static function createFromString(?string $dateString)
-    {
-        return self::__construct(new DateTimeImmutable($dateString));
-    }
-
-    public function value(): DateTimeInmutable
+    public function value(): \DateTimeImmutable
     {
         return $this->value;
     }
 
     public function __toString(): string
     {
-        return $this->value->format(DateTimeInterface::ATOM);
+        return $this->value->format(\DateTimeInterface::ATOM);
     }
 }

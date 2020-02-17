@@ -90,7 +90,7 @@ class Advertisement
 
     public function delete(): void
     {
-        $this->deletedAt = DateValueObject::createFromString();
+        $this->deletedAt = AdvertisementDate::createFromString('now');
     }
 
     public function recover(): void
