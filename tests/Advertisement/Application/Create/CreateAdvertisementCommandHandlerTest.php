@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Advertisement\Application;
+namespace App\Tests\Advertisement\Application\Create;
 
 use Faker\Factory;
 use App\Domain\Owner;

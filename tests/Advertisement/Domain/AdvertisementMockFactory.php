@@ -40,4 +40,9 @@ final class AdvertisementMockFactory
 
         return ['id' => $id, 'title' => $title, 'description' => $description, 'price' => $price, 'locality' => $locality];
     }
+
+    public static function GenerateRandomId(): Uuid
+    {
+        return new AdvertisementId((string) Uuid::random());
+    }
 }
