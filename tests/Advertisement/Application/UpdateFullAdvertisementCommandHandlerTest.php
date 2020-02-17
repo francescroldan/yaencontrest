@@ -15,24 +15,24 @@ class UpdateFullAdvertisementCommandHandlerTest extends TestCase
 {
     public function itShouldUpdateAdvertisement()
     {
-        $adverisementData = AdvertisementMockFactory::GenerateRandomData();
-        $updateAdvertisementCommand = new UpdateAdvertisementCommand(
-            $adverisementData['id'],
-            $adverisementData['title'],
-            $adverisementData['description'],
-            $adverisementData['price'],
-            $adverisementData['locality'],
-            $adverisementData['owner']
-        );
-        $advertisementRepositoryMock = $this->createMock(AdvertisementRepository::class)
-            ->shouldReceive('save')
-            ->with(Advertisement::class)
-            ->once()
-            ->andReturnNull();
+        // $adverisementData = AdvertisementMockFactory::GenerateRandomData();
+        // $updateAdvertisementCommand = new UpdateAdvertisementCommand(
+        //     $adverisementData['id'],
+        //     $adverisementData['title'],
+        //     $adverisementData['description'],
+        //     $adverisementData['price'],
+        //     $adverisementData['locality'],
+        //     $adverisementData['owner']
+        // );
+        // $advertisementRepositoryMock = $this->createMock(AdvertisementRepository::class)
+        //     ->shouldReceive('save')
+        //     ->with(Advertisement::class)
+        //     ->once()
+        //     ->andReturnNull();
 
-        $advertisementUpdater = new AdvertisementUpdater($advertisementRepositoryMock);
-        $updateAdvertisementCommandHandler = new UpdateAdvertisementCommandHandler($advertisementUpdater);
+        // $advertisementUpdater = new AdvertisementUpdater($advertisementRepositoryMock);
+        // $updateAdvertisementCommandHandler = new UpdateAdvertisementCommandHandler($advertisementUpdater);
 
-        $updateAdvertisementCommandHandler($updateAdvertisementCommand);
+        // $updateAdvertisementCommandHandler($updateAdvertisementCommand);
     }
 }
