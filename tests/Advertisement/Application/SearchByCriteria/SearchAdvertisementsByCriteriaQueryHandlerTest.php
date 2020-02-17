@@ -15,9 +15,10 @@ use App\Application\SearchByCriteria\SearchAdvertisementsByCriteriaQueryHandler;
 
 class SearchAdvertisementsByCriteriaQueryHandlerTest extends TestCase
 {
-    public function testItShouldSearchForAdvertisements()
+    public function testItShouldSearchForAdvertisementsWithCriterias()
     {
-        for ($i = 0; $i < 5; $i++) {
+        $counter = rand(2, 8);
+        for ($i = 0; $i < $counter; $i++) {
             $expectedAdvertisements[] = AdvertisementMockFactory::GenerateRandom();
         }
 
@@ -40,6 +41,26 @@ class SearchAdvertisementsByCriteriaQueryHandlerTest extends TestCase
         $advertisementByCriteriaSearcher = new AdvertisementsByCriteriaSearcher($advertisementRepositoryMock);
         $searchAdvertisementsByCriteriaQueryHandler = new SearchAdvertisementsByCriteriaQueryHandler($advertisementByCriteriaSearcher);
 
-        $this->assertEquals(5, count($searchAdvertisementsByCriteriaQueryHandler($searchAdvertisementsByCriteriaQuery)->advertisements()));
+        $this->assertEquals($counter, count($searchAdvertisementsByCriteriaQueryHandler($searchAdvertisementsByCriteriaQuery)->advertisements()));
+    }
+
+    public function testItShouldSearchForAdvertisementsWithoutCriteria()
+    {
+        $counter = rand(2, 8);
+        for ($i = 0; $i < $counter; $i++) {
+            $expectedAdvertisements[] = AdvertisementMockFactory::GenerateRandom();
+        }
+
+        $searchAdvertisementsByCriteriaQuery = new SearchAdvertisementsByCriteriaQuery([]);
+
+        $advertisementRepositoryMock = $this->createMock(AdvertisementRepository::class);
+        $advertisementRepositoryMock->expects($this->once())
+            ->method('matching')
+            ->willReturn($expectedAdvertisements);
+
+        $advertisementByCriteriaSearcher = new AdvertisementsByCriteriaSearcher($advertisementRepositoryMock);
+        $searchAdvertisementsByCriteriaQueryHandler = new SearchAdvertisementsByCriteriaQueryHandler($advertisementByCriteriaSearcher);
+
+        $this->assertEquals($counter, count($searchAdvertisementsByCriteriaQueryHandler($searchAdvertisementsByCriteriaQuery)->advertisements()));
     }
 }

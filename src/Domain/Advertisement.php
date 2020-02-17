@@ -97,4 +97,29 @@ class Advertisement
     {
         $this->deletedAt = null;
     }
+
+    public function changeTitle(?AdvertisementTitle $title = null)
+    {
+        if ($title !== null) {
+            $this->title = $title;
+        }
+    }
+    public function changeDescription(?AdvertisementDescription $description = null)
+    {
+        if ($description !== null) {
+            $this->description = $description;
+        }
+    }
+    public function changePrice(?AdvertisementPrice $price = null)
+    {
+        if ($price !== null) {
+            $this->price = $price;
+        }
+    }
+    public function changeLocality(?AdvertisementLocality $locality = null)
+    {
+        if ($locality !== null) {
+            $this->locality = $locality;
+        }
+    }
 }
