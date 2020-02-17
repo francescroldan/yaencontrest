@@ -1,40 +1,43 @@
-version: '2'
-
+version: '3.7'
 services:
-    nginx:
-        build: docker/nginx
-        ports:
-            - ${API_PORT}:80
-        volumes_from:
-            - app
-        volumes:
-            - ./logs/nginx:/var/log/nginx
-    app:
-        command: "true"
-        image: alpine:3.4
-        volumes:
-            - .:/var/www/app
-    php:
-        build: docker/php
-        expose:
-            - 9000
-        links:
-            - mysql 
-        volumes:
-            - composer-cache:/composer/cache
-        volumes_from:
-            - app
-    mysql:
+    db:
+        container_name: db
         image: mysql
-        volumes:
-            - "./.data/db:/var/lib/mysql"
+        command: ["--default-authentication-plugin=mysql_native_password"]
+        ports:
+            - "${MYSQL_PORT}:${MYSQL_INTERNAL_PORT}"
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-        ports: 
-            - "${MYSQL_PORT}:${MYSQL_INTERNAL_PORT}"
-volumes:
-    composer-cache:
-        driver: local
+        networks:
+            - db
+    php:
+        container_name: php-fpm
+        build: ./docker/php-fpm
+        ports:
+            - "9000:9001"
+        volumes:
+            - .:/var/www/symfony:cached
+            - ./logs/symfony:/var/www/symfony/var/log:cached
+        depends_on: 
+            - db
+        networks:
+            - db
+            - php
+    nginx:
+        container_name: nginx
+        build: ./docker/nginx
+        ports:
+            - ${API_PORT}:80
+        depends_on: 
+            - php
+        networks:
+            - php
+        volumes:
+            - ./logs/nginx:/var/log/nginx:cached
+            - .:/var/www/symfony:cached
+networks:
+    db:
+    php:
