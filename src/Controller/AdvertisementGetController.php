@@ -13,6 +13,17 @@ class AdvertisementGetController
 
     public function __invoke(Request $request): JsonResponse
     {
+        // /** @var BackofficeCoursesResponse $response */
+        // $response = $this->queryBus->ask(
+        //     new SearchBackofficeCoursesByCriteriaQuery(
+        //         $request->query->get('filters', []),
+        //         $request->query->get('order_by'),
+        //         $request->query->get('order'),
+        //         $request->query->get('limit'),
+        //         $request->query->get('offset')
+        //     )
+        // );
+
         return new JsonResponse(
             [
                 'title' => 'Titulo',
