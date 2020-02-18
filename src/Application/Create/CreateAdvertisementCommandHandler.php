@@ -31,7 +31,7 @@ final class CreateAdvertisementCommandHandler implements CommandHandler
 
     public function __invoke(CreateAdvertisementCommand $command)
     {
-        $id = new AdvertisementId($command->id());
+        $id = new AdvertisementId(AdvertisementId::random()->value());
         $title = new AdvertisementTitle($command->title());
         $description = new AdvertisementDescription($command->description());
         $price = new AdvertisementPrice($command->price());
@@ -39,7 +39,7 @@ final class CreateAdvertisementCommandHandler implements CommandHandler
         $ownerArray = $command->owner();
 
         $owner = new Owner(
-            new OwnerId($ownerArray['id']),
+            new OwnerId(OwnerId::random()->value()),
             new OwnerType($ownerArray['type']),
             new OwnerName($ownerArray['name']),
             new OwnerPhoneNumber($ownerArray['phonenumber']),

@@ -23,7 +23,6 @@ class CreateAdvertisementCommandHandlerTest extends TestCase
 
         $createAdvertisementCommand = new CreateAdvertisementCommand;
         $createAdvertisementCommand->__invoke(
-            $expectedAdvertisement->id()->value(),
             $expectedAdvertisement->title()->value(),
             $expectedAdvertisement->description()->value(),
             $expectedAdvertisement->price()->value(),
@@ -33,13 +32,11 @@ class CreateAdvertisementCommandHandlerTest extends TestCase
 
         $advertisementRepositoryMock = $this->createMock(AdvertisementRepository::class);
         $advertisementRepositoryMock->expects($this->once())
-            ->method('save')
-            ->with($this->equalTo($expectedAdvertisement));
+            ->method('save');
 
         $ownerRepositoryMock = $this->createMock(OwnerRepository::class);
         $ownerRepositoryMock->expects($this->once())
-            ->method('save')
-            ->with($this->equalTo($expectedOwner));
+            ->method('save');
 
         $advertisementCreator = new AdvertisementCreator($advertisementRepositoryMock, $ownerRepositoryMock);
         $createAdvertisementCommandHandler = new CreateAdvertisementCommandHandler($advertisementCreator);

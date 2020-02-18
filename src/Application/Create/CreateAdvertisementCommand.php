@@ -11,19 +11,13 @@ class CreateAdvertisementCommand
     private $locality;
     private $owner;
 
-    public function __invoke(string $id, string $title, string $description, float $price, string $locality, array $owner)
+    public function __invoke(string $title, string $description, float $price, string $locality, array $owner)
     {
-        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->price = $price;
         $this->locality = $locality;
         $this->owner = $owner;
-    }
-
-    public function id(): string
-    {
-        return $this->id;
     }
 
     public function title(): string
