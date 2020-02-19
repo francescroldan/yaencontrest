@@ -29,7 +29,7 @@ final class CreateAdvertisementCommandHandler implements CommandHandler
         $this->creator = $creator;
     }
 
-    public function __invoke(CreateAdvertisementCommand $command)
+    public function __invoke(CreateAdvertisementCommand $command): void
     {
         $id = new AdvertisementId(AdvertisementId::random()->value());
         $title = new AdvertisementTitle($command->title());

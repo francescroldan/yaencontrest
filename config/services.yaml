@@ -26,10 +26,45 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    app.advertisement.repository.mysql:
+        class: App\Infrastructure\MySQLAdvertisementRepository
+        bind:
+            $entityManager: '@doctrine.orm.default_entity_manager'
+
+    app.owner.repository.mysql:
+        class: App\Infrastructure\MySQLOwnerRepository
+        bind:
+            $entityManager: '@doctrine.orm.default_entity_manager'
+
+    #create
+    advertisement_creator:
+        class: App\Application\Create\AdvertisementCreator
+        bind:
+            $advertisementRepository: '@app.advertisement.repository.mysql'
+            $ownerRepository: '@app.owner.repository.mysql'
+
+    create_advertisement_command_handler:
+        class: App\Application\Create\CreateAdvertisementCommandHandler
+        bind:
+            $creator: '@advertisement_creator'
+           
+    App\Controller\AdvertisementCreateController:
+        public: true
+        bind:
+            $handler: '@create_advertisement_command_handler'
+
+    #get
+    advertisement_finder:
+        class: App\Application\Find\AdvertisementFinder
+        bind:
+            $advertisementRepository: '@app.advertisement.repository.mysql'
+
+    find_advertisement_command_handler:
+        class: App\Application\Find\FindAdvertisementCommandHandler
+        bind:
+            $finder: '@advertisement_finder'
+
     App\Controller\AdvertisementGetController:
         public: true
         bind:
-            # for any $logger argument, pass this specific service
-            $logger: '@monolog.logger.doctrine'
-            # for any $projectDir argument, pass this parameter value
-            $projectDir: '%kernel.project_dir%'
+            $handler: '@find_advertisement_command_handler'

@@ -2,7 +2,9 @@
 
 namespace App\Application\Update;
 
-class UpdateAdvertisementCommand
+use App\Application\Command;
+
+class UpdateAdvertisementCommand implements Command
 {
     private $id;
     private $title;

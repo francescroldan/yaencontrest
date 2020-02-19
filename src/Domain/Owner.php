@@ -18,24 +18,16 @@ class Owner
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    /** @ORM\Column(name="type", type="integer") */
     private $type;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
+    /** @ORM\Column(name = "name", type = "string") */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
+    /** @ORM\Column(name = "phonenumber", type = "string") */
     private $phonenumber;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
+    /** @ORM\Column(name = "email", type = "string") */
     private $email;
 
     /**
@@ -85,7 +77,7 @@ class Owner
      */
     public function getType()
     {
-        return $this->type;
+        return $this->type->value();
     }
 
     /**
@@ -105,7 +97,7 @@ class Owner
      */
     public function getName()
     {
-        return $this->name;
+        return $this->name->value();
     }
 
     /**
@@ -125,7 +117,7 @@ class Owner
      */
     public function getPhonenumber()
     {
-        return $this->phonenumber;
+        return $this->phonenumber->value();
     }
 
     /**
@@ -145,7 +137,7 @@ class Owner
      */
     public function getEmail()
     {
-        return $this->email;
+        return $this->email->value();
     }
 
     /**
@@ -183,10 +175,10 @@ class Owner
         return $this->name;
     }
 
-    public function phonenumber(): OwnerPhonenumber
-    {
-        return $this->phonenumber;
-    }
+    // public function phonenumber(): OwnerPhonenumber
+    // {
+    //     return $this->phonenumber;
+    // }
 
     public function email(): OwnerEmail
     {
@@ -196,11 +188,11 @@ class Owner
     public function __toArray()
     {
         return [
-            'id' => $this->id->value(),
-            'type' => $this->type->value(),
-            'name' => $this->name->value(),
-            'phonenumber' => $this->phonenumber->value(),
-            'email' => $this->email->value()
+            'id' => $this->id,
+            'type' => $this->type,
+            'name' => $this->name,
+            'phonenumber' => $this->phonenumber,
+            'email' => $this->email
         ];
     }
 }

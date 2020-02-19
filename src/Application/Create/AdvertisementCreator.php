@@ -35,7 +35,7 @@ final class AdvertisementCreator
     ) {
         $advertisement  = Advertisement::create($id, $title, $description, $price, $locality, $owner);
 
-        $this->advertisementRepository->save($advertisement);
         $this->ownerRepository->save($owner);
+        $this->advertisementRepository->save($advertisement);
     }
 }

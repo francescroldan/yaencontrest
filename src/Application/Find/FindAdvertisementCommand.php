@@ -2,7 +2,9 @@
 
 namespace App\Application\Find;
 
-class FindAdvertisementCommand
+use App\Application\Command;
+
+class FindAdvertisementCommand implements Command
 {
     private $id;
 

@@ -16,35 +16,25 @@ class Advertisement
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    /** @ORM\Column(name = "email", type = "string", length=255) */
     private $title;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    /** @ORM\Column(name="description", type="string") */
     private $description;
 
-    /**
-     * @ORM\Column(type="decimal", precision=7, scale=2)
-     */
+    /**  @ORM\Column(name = "price", type="decimal", precision=7, scale=2) */
     private $price;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
+    /** @ORM\Column(name="locality", type="string", length=100) */
     private $locality;
+
+    /** @ORM\Column(name="deleted_at", type="datetime", length=100, nullable=true) */
+    private $deletedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Owner", inversedBy="advertisements")
      */
     private $owner;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $city;
 
     public function __construct(
         AdvertisementId $id,
@@ -97,6 +87,9 @@ class Advertisement
      */
     public function setId($id)
     {
+        if (!$id instanceof AdvertisementId) {
+            $id = new AdvertisementId($id);
+        }
         $this->id = $id;
 
         return $this;
@@ -107,7 +100,7 @@ class Advertisement
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->title->value();
     }
 
     /**
@@ -117,6 +110,9 @@ class Advertisement
      */
     public function setTitle($title)
     {
+        if (!$title instanceof AdvertisementTitle) {
+            $title = new AdvertisementId($title);
+        }
         $this->title = $title;
 
         return $this;
@@ -127,7 +123,7 @@ class Advertisement
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->description->value();
     }
 
     /**
@@ -137,6 +133,9 @@ class Advertisement
      */
     public function setDescription($description)
     {
+        if (!$description instanceof AdvertisementDescription) {
+            $description = new AdvertisementId($description);
+        }
         $this->description = $description;
 
         return $this;
@@ -147,7 +146,7 @@ class Advertisement
      */
     public function getPrice()
     {
-        return $this->price;
+        return $this->price->value();
     }
 
     /**
@@ -157,6 +156,9 @@ class Advertisement
      */
     public function setPrice($price)
     {
+        if (!$price instanceof AdvertisementPrice) {
+            $price = new AdvertisementId($price);
+        }
         $this->price = $price;
 
         return $this;
@@ -167,7 +169,7 @@ class Advertisement
      */
     public function getLocality()
     {
-        return $this->locality;
+        return $this->locality->value();
     }
 
     /**
@@ -177,6 +179,9 @@ class Advertisement
      */
     public function setLocality($locality)
     {
+        if (!$locality instanceof Advertisementlocality) {
+            $locality = new AdvertisementId($locality);
+        }
         $this->locality = $locality;
 
         return $this;
@@ -194,14 +199,14 @@ class Advertisement
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getDeletedAt(): ?string
     {
-        return $this->city;
+        return $this->deletedat->value();
     }
 
-    public function setCity(string $city): self
+    public function setDeletedAt(\DateTimeImmutable $deletedat): self
     {
-        $this->city = $city;
+        $this->deletedat = $deletedat;
 
         return $this;
     }
@@ -245,7 +250,7 @@ class Advertisement
 
     public function delete(): void
     {
-        $this->deletedAt = AdvertisementDate::createFromString('now');
+        $this->deletedAt = AdvertisementDeletedAt::createFromString('now');
     }
 
     public function recover(): void
@@ -276,5 +281,17 @@ class Advertisement
         if ($locality !== null) {
             $this->locality = $locality;
         }
+    }
+
+    public function __toArray()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'price' => $this->price,
+            'locality' => $this->locality,
+            'owner' => $this->owner->__toArray(),
+        ];
     }
 }

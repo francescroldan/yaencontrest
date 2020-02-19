@@ -2,7 +2,9 @@
 
 namespace App\Application\Delete;
 
-class DeleteAdvertisementCommand
+use App\Application\Command;
+
+class DeleteAdvertisementCommand implements Command
 {
     private $id;
 

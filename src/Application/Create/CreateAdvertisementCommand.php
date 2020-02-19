@@ -2,7 +2,9 @@
 
 namespace App\Application\Create;
 
-class CreateAdvertisementCommand
+use App\Application\Command;
+
+class CreateAdvertisementCommand implements Command
 {
     private $id;
     private $title;
