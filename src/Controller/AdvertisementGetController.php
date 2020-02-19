@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Application\AdvertisementResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Application\Find\FindAdvertisementCommand;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,19 +38,5 @@ class AdvertisementGetController extends BusController
         }
 
         return $this->response($response->__toArray(), $headers = []);
-    }
-
-    private function toArray(): callable
-    {
-        return static function (AdvertisementResponse $advertisement) {
-            return [
-                'id'            => $advertisement->id(),
-                'title'         => $advertisement->title(),
-                'description'   => $advertisement->description(),
-                'price'         => $advertisement->price(),
-                'locality'      => $advertisement->locality(),
-                'owner'         => $advertisement->owner()
-            ];
-        };
     }
 }

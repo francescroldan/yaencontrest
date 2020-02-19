@@ -26,6 +26,7 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    # repositories
     app.advertisement.repository.mysql:
         class: App\Infrastructure\MySQLAdvertisementRepository
         bind:
@@ -36,6 +37,7 @@ services:
         bind:
             $entityManager: '@doctrine.orm.default_entity_manager'
 
+    # USE CASES
     #create
     advertisement_creator:
         class: App\Application\Create\AdvertisementCreator
@@ -68,3 +70,19 @@ services:
         public: true
         bind:
             $handler: '@find_advertisement_command_handler'
+
+    #search
+    advertisement_by_criteria_searcher:
+        class: App\Application\SearchByCriteria\AdvertisementsByCriteriaSearcher
+        bind:
+            $advertisementRepository: '@app.advertisement.repository.mysql'
+
+    search_by_criteria_advertisement_command_handler:
+        class: App\Application\SearchByCriteria\SearchAdvertisementsByCriteriaQueryHandler
+        bind:
+            $searcher: '@advertisement_by_criteria_searcher'
+
+    App\Controller\AdvertisementSearchByCriteriaController:
+        public: true
+        bind:
+            $handler: '@search_by_criteria_advertisement_command_handler'

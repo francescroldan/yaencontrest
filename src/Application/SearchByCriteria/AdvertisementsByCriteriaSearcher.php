@@ -15,18 +15,20 @@ use function Lambdish\Phunctional\map;
 
 final class AdvertisementsByCriteriaSearcher
 {
-    private $repository;
+    private $advertisementRepository;
 
-    public function __construct(AdvertisementRepository $repository)
+    public function __construct(AdvertisementRepository $advertisementRepository)
     {
-        $this->repository = $repository;
+        $this->advertisementRepository = $advertisementRepository;
     }
 
     public function search(Filters $filters, Order $order, ?int $limit, ?int $offset): AdvertisementsResponse
     {
         $criteria = new Criteria($filters, $order, $offset, $limit);
+        // var_dump($this->advertisementRepository->searchBy($filters, $orderBy, $order, $limit, $offset));
+        // die;
 
-        return new AdvertisementsResponse(...map($this->toResponse(), $this->repository->matching($criteria)));
+        return new AdvertisementsResponse(...map($this->toResponse(), $this->advertisementRepository->matching($criteria)));
     }
 
     private function toResponse(): callable

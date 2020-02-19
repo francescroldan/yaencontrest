@@ -188,11 +188,11 @@ class Owner
     public function __toArray()
     {
         return [
-            'id' => $this->id,
-            'type' => $this->type,
-            'name' => $this->name,
-            'phonenumber' => $this->phonenumber,
-            'email' => $this->email
+            'id' => (string) $this->id,
+            'type' => intVal((string) $this->type),
+            'name' => (string) $this->name,
+            'phonenumber' => (string) $this->phonenumber,
+            'email' => (string) $this->email
         ];
     }
 }

@@ -22,6 +22,7 @@ final class SearchAdvertisementsByCriteriaQueryHandler
         $filters = Filters::fromValues($query->filters());
         $order   = Order::fromValues($query->orderBy(), $query->order());
 
+        // return $this->searcher->search($query->filters(), $query->orderBy(), $query->order(), $query->limit(), $query->offset());
         return $this->searcher->search($filters, $order, $query->limit(), $query->offset());
     }
 }

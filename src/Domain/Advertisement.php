@@ -16,7 +16,7 @@ class Advertisement
      */
     private $id;
 
-    /** @ORM\Column(name = "email", type = "string", length=255) */
+    /** @ORM\Column(name = "title", type = "string", length=255) */
     private $title;
 
     /** @ORM\Column(name="description", type="string") */
@@ -211,30 +211,43 @@ class Advertisement
         return $this;
     }
 
-
-
     public function id(): AdvertisementId
     {
+        if (!$this->id instanceof AdvertisementId) {
+            return new AdvertisementId($this->id);
+        }
         return $this->id;
     }
 
     public function title(): AdvertisementTitle
     {
+        if (!$this->title instanceof AdvertisementTitle) {
+            return new AdvertisementTitle($this->title);
+        }
         return $this->title;
     }
 
     public function description(): AdvertisementDescription
     {
+        if (!$this->description instanceof AdvertisementDescription) {
+            return new AdvertisementDescription($this->description);
+        }
         return $this->description;
     }
 
     public function price(): AdvertisementPrice
     {
+        if (!$this->price instanceof AdvertisementPrice) {
+            return new AdvertisementPrice($this->price);
+        }
         return $this->price;
     }
 
     public function locality(): AdvertisementLocality
     {
+        if (!$this->locality instanceof AdvertisementLocality) {
+            return new AdvertisementLocality($this->locality);
+        }
         return $this->locality;
     }
 

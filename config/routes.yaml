@@ -7,11 +7,13 @@ api_login_check:
   path: /api/login_check
   controller: App\Controller\AuthController::getTokenUser
 
-test:
-  path: /api/test
-  controller: App\Controller\ApiController::test
-
-
+  
+  
+  # API
+health-check_get:
+  path: /health-check
+  controller: App\Controller\ApiController::healthCheck
+  methods: GET
 
 advertisement_create_controller:
   path: /api/advertisement
@@ -21,4 +23,9 @@ advertisement_create_controller:
 advertisement_get_controller:
   path: /api/advertisement/{id}
   controller: App\Controller\AdvertisementGetController
+  methods: GET
+
+advertisement_search_by_criteria_controller:
+  path: /api/advertisements
+  controller: App\Controller\AdvertisementSearchByCriteriaController
   methods: GET

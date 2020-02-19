@@ -151,4 +151,9 @@ class ApiController extends AbstractController
 
         return $request;
     }
+
+    public function healthCheck(UserInterface $user, JWTTokenManagerInterface $JWTManager)
+    {
+        return $this->respondWithSuccess('Runs!');
+    }
 }
