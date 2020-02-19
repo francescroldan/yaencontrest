@@ -6,7 +6,7 @@ namespace App\Application\Find;
 
 use App\Domain\Advertisement;
 use App\Domain\AdvertisementId;
-use App\Domain\AdvertisementNotExist;
+use App\Domain\AdvertisementNotExistException;
 use App\Domain\AdvertisementRepository;
 
 class AdvertisementFinder
@@ -23,7 +23,7 @@ class AdvertisementFinder
         $advertisement = $this->advertisementRepository->search($id);
 
         if (null === $advertisement) {
-            throw new AdvertisementNotExist($id);
+            throw new AdvertisementNotExistException($id);
         }
 
         return $advertisement;

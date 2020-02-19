@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
-use \DateTimeImmutable;
+use \DateTime;
 use \DateTimeInterface;
 
 abstract class DateValueObject
 {
     protected $value;
 
-    public function __construct(\DateTimeImmutable $value)
+    public function __construct(\DateTime $value)
     {
         $this->value = $value;
     }
 
-    public function value(): \DateTimeImmutable
+    public function value(): \DateTime
     {
         return $this->value;
     }

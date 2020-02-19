@@ -17,21 +17,4 @@ final class MySQLOwnerRepository extends DoctrineRepository implements OwnerRepo
     {
         $this->persist($owner);
     }
-
-    // public function search(OwnerId $id): ?Owner
-    // {
-    //     return $this->repository(Owner::class)->find((string) $id);
-    // }
-
-    // public function searchAll(): array
-    // {
-    //     return $this->repository(Owner::class)->findAll();
-    // }
-
-    // public function matching(Criteria $criteria): array
-    // {
-    //     $doctrineCriteria = DoctrineCriteriaConverter::convert($criteria);
-
-    //     return $this->repository(Owner::class)->matching($doctrineCriteria)->toArray();
-    // }
 }

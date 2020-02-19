@@ -175,10 +175,10 @@ class Owner
         return $this->name;
     }
 
-    // public function phonenumber(): OwnerPhonenumber
-    // {
-    //     return $this->phonenumber;
-    // }
+    public function phonenumber(): OwnerPhonenumber
+    {
+        return $this->phonenumber;
+    }
 
     public function email(): OwnerEmail
     {

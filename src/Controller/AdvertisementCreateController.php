@@ -19,7 +19,7 @@ class AdvertisementCreateController extends BusController
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            $request = $this->validateAdvertisementRequest($request);
+            $request = $this->validateAdvertisementRequest($request, false);
         } catch (\Exception $e) {
             return $this->respondValidationError($e->getMessage());
         }

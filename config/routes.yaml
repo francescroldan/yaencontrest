@@ -20,6 +20,16 @@ advertisement_create_controller:
   controller: App\Controller\AdvertisementCreateController
   methods: POST
 
+advertisement_update_controller:
+  path: /api/advertisement/{id}
+  controller: App\Controller\AdvertisementUpdateController
+  methods: PUT
+
+advertisement_update_partial_controller:
+  path: /api/advertisement/{id}
+  controller: App\Controller\AdvertisementUpdatePartialController
+  methods: PATCH
+
 advertisement_get_controller:
   path: /api/advertisement/{id}
   controller: App\Controller\AdvertisementGetController
@@ -29,3 +39,8 @@ advertisement_search_by_criteria_controller:
   path: /api/advertisements
   controller: App\Controller\AdvertisementSearchByCriteriaController
   methods: GET
+
+advertisement_delete_controller:
+  path: /api/advertisement/{id}
+  controller: App\Controller\AdvertisementDeleteController
+  methods: DELETE

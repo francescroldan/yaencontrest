@@ -6,7 +6,7 @@ namespace App\Domain;
 
 use DomainException;
 
-final class AdvertisementNotExist extends DomainException
+final class AdvertisementNotExistException extends DomainException
 {
     private $id;
 

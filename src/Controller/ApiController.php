@@ -136,6 +136,18 @@ class ApiController extends AbstractController
         return $this->setStatusCode(201)->response($data);
     }
 
+    /**
+     * Returns a 204 Updated
+     *
+     * @param array $data
+     *
+     * @return JsonResponse
+     */
+    public function respondUpdated($data = [])
+    {
+        return $this->setStatusCode(204)->response($data);
+    }
+
     // this method allows us to accept JSON payloads in POST requests
     // since Symfony 4 doesn’t handle that automatically:
 

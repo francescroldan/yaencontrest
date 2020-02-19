@@ -111,7 +111,7 @@ class Advertisement
     public function setTitle($title)
     {
         if (!$title instanceof AdvertisementTitle) {
-            $title = new AdvertisementId($title);
+            $title = new AdvertisementTitle($title);
         }
         $this->title = $title;
 
@@ -134,7 +134,7 @@ class Advertisement
     public function setDescription($description)
     {
         if (!$description instanceof AdvertisementDescription) {
-            $description = new AdvertisementId($description);
+            $description = new AdvertisementDescription($description);
         }
         $this->description = $description;
 
@@ -157,7 +157,7 @@ class Advertisement
     public function setPrice($price)
     {
         if (!$price instanceof AdvertisementPrice) {
-            $price = new AdvertisementId($price);
+            $price = new AdvertisementPrice($price);
         }
         $this->price = $price;
 
@@ -180,7 +180,7 @@ class Advertisement
     public function setLocality($locality)
     {
         if (!$locality instanceof Advertisementlocality) {
-            $locality = new AdvertisementId($locality);
+            $locality = new Advertisementlocality($locality);
         }
         $this->locality = $locality;
 
@@ -199,13 +199,16 @@ class Advertisement
         return $this;
     }
 
-    public function getDeletedAt(): ?string
+    public function getDeletedAt(): ?\DateTime
     {
-        return $this->deletedat->value();
+        $this->deletedAt = new \DateTime('now');
     }
 
-    public function setDeletedAt(\DateTimeImmutable $deletedat): self
+    public function setDeletedAt(\DateTime $deletedat): self
     {
+        if (!$deletedat instanceof Advertisementlocality) {
+            $deletedat = new AdvertisementId($deletedat);
+        }
         $this->deletedat = $deletedat;
 
         return $this;
@@ -263,7 +266,7 @@ class Advertisement
 
     public function delete(): void
     {
-        $this->deletedAt = AdvertisementDeletedAt::createFromString('now');
+        $this->deletedAt = new \DateTime('now');
     }
 
     public function recover(): void

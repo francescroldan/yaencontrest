@@ -86,3 +86,44 @@ services:
         public: true
         bind:
             $handler: '@search_by_criteria_advertisement_command_handler'
+
+    #get
+    advertisement_deleter:
+        class: App\Application\Delete\AdvertisementDeleter
+        bind:
+            $advertisementRepository: '@app.advertisement.repository.mysql'
+            $finder: '@advertisement_finder'
+
+    delete_advertisement_command_handler:
+        class: App\Application\Delete\DeleteAdvertisementCommandHandler
+        bind:
+            $deleter: '@advertisement_deleter'
+
+    App\Controller\AdvertisementDeleteController:
+        public: true
+        bind:
+            $handler: '@delete_advertisement_command_handler'
+
+    #update full
+    advertisement_updater:
+        class: App\Application\Update\AdvertisementUpdater
+        bind:
+            $advertisementRepository: '@app.advertisement.repository.mysql'
+            $finder: '@advertisement_finder'
+
+    update_advertisement_command_handler:
+        class: App\Application\Update\UpdateAdvertisementCommandHandler
+        bind:
+            $updater: '@advertisement_updater'
+           
+    App\Controller\AdvertisementUpdateController:
+        public: true
+        bind:
+            $handler: '@update_advertisement_command_handler'
+    
+    #update partial           
+    App\Controller\AdvertisementUpdatePartialController:
+        public: true
+        bind:
+            $handler: '@update_advertisement_command_handler'
+
