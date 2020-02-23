@@ -25,8 +25,6 @@ final class AdvertisementsByCriteriaSearcher
     public function search(Filters $filters, Order $order, ?int $limit, ?int $offset): AdvertisementsResponse
     {
         $criteria = new Criteria($filters, $order, $offset, $limit);
-        // var_dump($this->advertisementRepository->searchBy($filters, $orderBy, $order, $limit, $offset));
-        // die;
 
         return new AdvertisementsResponse(...map($this->toResponse(), $this->advertisementRepository->matching($criteria)));
     }

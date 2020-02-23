@@ -35,7 +35,7 @@ final class AdvertisementMockFactory
         $id = (string) Uuid::random();
         $title = MockFactory::random()->sentence();
         $description = MockFactory::random()->paragraph();
-        $price = MockFactory::random()->randomFloat(2);
+        $price = MockFactory::random()->randomFloat(2, 1, 5000);
         $locality = MockFactory::random()->state();
 
         return ['id' => $id, 'title' => $title, 'description' => $description, 'price' => $price, 'locality' => $locality];

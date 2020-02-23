@@ -7,8 +7,11 @@ namespace App\Application;
 final class AdvertisementResponse
 {
     private $id;
-    private $name;
-    private $duration;
+    private $title;
+    private $description;
+    private $price;
+    private $locality;
+    private $owner;
 
     public function __construct(string $id, string $title, string $description, float $price, string $locality, array $owner)
     {

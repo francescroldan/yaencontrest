@@ -127,3 +127,11 @@ services:
         bind:
             $handler: '@update_advertisement_command_handler'
 
+    #command
+    app.populate.command:
+        class: App\Command\PopulateDBCommand
+        bind:
+            $advertisementRepository: '@app.advertisement.repository.mysql'
+            $ownerRepository: '@app.owner.repository.mysql'
+        tags:
+            - { name: 'console.command', command: 'app:populate' }

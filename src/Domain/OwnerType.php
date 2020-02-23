@@ -18,4 +18,9 @@ final class OwnerType extends IntValueObject
         parent::__construct($type);
         $this->type = $type;
     }
+
+    public function type()
+    {
+        return $this->type;
+    }
 }

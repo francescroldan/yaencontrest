@@ -18,7 +18,8 @@ class Owner
      */
     private $id;
 
-    /** @ORM\Column(name="type", type="integer") */
+    // /** @ORM\Column(name="type", type="integer") */
+    /** @ORM\Embedded(class = "OwnerType", columnPrefix = false) */
     private $type;
 
     /** @ORM\Column(name = "name", type = "string") */
@@ -77,7 +78,7 @@ class Owner
      */
     public function getType()
     {
-        return $this->type->value();
+        return $this->type->type();
     }
 
     /**
@@ -175,7 +176,7 @@ class Owner
         return $this->name;
     }
 
-    public function phonenumber(): OwnerPhonenumber
+    public function phonenumber(): OwnerPhoneNumber
     {
         return $this->phonenumber;
     }
@@ -189,7 +190,7 @@ class Owner
     {
         return [
             'id' => (string) $this->id,
-            'type' => intVal((string) $this->type),
+            'type' => $this->type->type(),
             'name' => (string) $this->name,
             'phonenumber' => (string) $this->phonenumber,
             'email' => (string) $this->email

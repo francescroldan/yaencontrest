@@ -25,7 +25,6 @@ class AdvertisementSearchByCriteriaController extends BusController
 
         try {
             $request = $this->parseParameters($request);
-            var_dump($request);
         } catch (\Exception $e) {
             return $this->respondValidationError($e->getMessage());
         }
